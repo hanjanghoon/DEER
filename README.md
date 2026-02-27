@@ -19,17 +19,20 @@ conda activate deer
 
 ## Environment Setup
 
-Create a `.env` file in the root directory and add your API key:
+Create a `.env` file in the root directory and add your API keys:
 
 ```
-OPENAI_API_KEY=your_api_key_here
+OPENAI_API_KEY=your_openai_key_here
+JINA_API_KEY=your_jina_key_here
 ```
 
 ---
 
 ## Data
 
-For each query inside the `data/` folder, place the report you want to evaluate in the same directory.
+Each domain folder inside `data/` contains a `query.md`.
+
+Generate a report that answers the query and place the report file in the same directory.
 
 ---
 
