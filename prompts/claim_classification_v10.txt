@@ -1,0 +1,63 @@
+
+You are an expert fact-checker. Your task is to **extract** distinct claims from the provided **Target Sentences** and **classify** each one into one of the following categories.
+
+**Class Definitions:**
+
+| **Class** | Definition |
+| --- | --- |
+| **A: Cited Claim** | Claims that include explicit citations (e.g., [1] or (Kim, 2024)) directly within the sentence. |
+| **B: Uncited - Same Section/Paragraph** | Claims whose supporting citations appear within the same section or paragraph. **Crucially, the Evidence Position MUST be in the same section or paragraph.** If the evidence is in a previous section, it is Class C. |
+| **C: Uncited – Previous Section/Paragraph** | Claims whose supporting citations appear in previous sections or paragraphs. **The Evidence Position MUST be in a previous section.** |
+| **D: Uncited – Recap/Structural** | Simple mentions of introduction, conclusion, abstract, or structural summaries. |
+| **E: Uncited – Citation not Required** | Widely accepted facts, common knowledge, author’s own findings, subjective claims, experimental results, methodological contributions, etc. **WARNING:** Conclusions, results, or findings of the paper are **NOT** Class E. They are specific claims that require evidence (Class A/B/C) or are uncited (Class F). |
+| **F: No-Citation – Unknown Source** | **Specific factual assertions** that require verification but lack any identifiable supporting source in the text. **If a claim is specific (e.g., "X has a radius of Y", "X is planar") and has no citation attached to it or the sentence immediately preceding/following it that covers this fact, it is Class F.** Do not assume a nearby citation covers it unless it clearly does. |
+
+
+**Instructions:**
+1. **Read the Report Context** to understand the global context.
+2. **Process the "Target Sentences"**:
+   - Break down the text into **atomic claims**. A single sentence may contain multiple claims (e.g., "X is Y, and Z requires W" -> Claim 1: "X is Y", Claim 2: "Z requires W").
+   - Extract **ALL** statements, including facts, opinions, structural descriptions, and summaries.
+3. **For each extracted claim**, analyze its relationship with the context and citations:
+   - **Step 1: Specificity Check.** Contains numbers, chemical properties, specific results? -> Likely A, B, C, or F.
+   - **Step 2: Citation Check.**
+     - Citation in same sentence? -> **Class A**.
+     - Citation in same paragraph? -> **Class B**.
+     - Citation in previous section? -> **Class C**.
+   - **Step 3: Uncited Check.**
+     - Specific fact but no citation? -> **Class F**.
+     - General knowledge/methodology/author opinion? -> **Class E**.
+     - Structural summary? -> **Class D**.
+4. **Determine Evidence Position:**
+   - For **Class B** or **C**, identify the exact sentence index (e.g., "L1.S1") that contains the citation supporting this claim.
+   - **Must** contain an explicit citation.
+5. **Output Format:**
+   - Return a JSON object with a list of claims.
+   - Each claim must include: `position` (line/sent index from input), `claim` (text), `claim_type` (A-F), `rationale`, `numeric` (bool), `citations` (list of strings), `implicit_citations` (list), `cross_references` (list).
+
+**Input Format:**
+# Report Excerpt
+...
+# Target Sentences
+L1.S1: ...
+L1.S2: ...
+
+**Extraction and Classification Logic:**
+- If a sentence is "Most perovskites are unstable[1], but our new material is stable.", extract TWO claims:
+  1. "Most perovskites are unstable." (Class A, citations=['1'])
+  2. "Our new material is stable." (Class E - Author's finding, or Class F if it lacks proof provided elsewhere)
+
+**Examples:**
+
+*Example Input:*
+L1.S1: Several studies[1] have shown that urban green spaces can reduce ambient air temperatures by up to 2 °C. This is crucial.
+
+*Example Output (Conceptual):*
+1. Claim: "Several studies have shown that urban green spaces can reduce ambient air temperatures by up to 2 °C." 
+   - Class: A
+   - Citations: ["1"]
+   - Position: "L1.S1"
+2. Claim: "This is crucial." 
+   - Class: B (supported by L1.S1)
+   - Evidence Position: "L1.S1"
+   - Position: "L1.S1"

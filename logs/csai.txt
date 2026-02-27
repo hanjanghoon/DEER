@@ -1,0 +1,74 @@
+▶️  Running pipeline for prefixes: gpt5.2_fast
+
+=== [gpt5.2_fast] 1️⃣ run_information_verification.py ===
+/opt/conda/envs/deer/lib/python3.10/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (2.6.3) or chardet (6.0.0.post1)/charset_normalizer (3.4.4) doesn't match a supported version!
+  warnings.warn(
+Starting claim extraction for 125 sentences in 7 batches...
+✓ Claim extraction completed in 42.57s - Found 83 claims
+Starting claim verification for 83 claims...
+✓ Claim verification completed in 33.36s
+🎉 Total evaluation completed in 75.99s
+✓ saved → /home/ubuntu/ex_disk/janghoon.han/DEER_git/output/csai/gpt5.2_fast/fact/0001.json
+
+=== [gpt5.2_fast] 2️⃣ run_report_evaluation.py ===
+/opt/conda/envs/deer/lib/python3.10/asyncio/base_events.py:1910: RuntimeWarning: coroutine 'Logging.async_success_handler' was never awaited
+  handle = None  # Needed to break cycles when an exception occurs.
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+
+============================================================
+📊 EVALUATION START
+Total tasks: 5
+Max concurrency: unlimited
+============================================================
+
+[23:47:08] [Sample 1] request_fulfillment START
+    [PROMPT_GEN] 0.000s
+[23:47:08] [Sample 1] analytical_soundness START
+    [PROMPT_GEN] 0.000s
+[23:47:08] [Sample 1] structural_coherence START
+    [PROMPT_GEN] 0.000s
+[23:47:08] [Sample 1] format_style START
+    [PROMPT_GEN] 0.000s
+[23:47:08] [Sample 1] information_ethics START
+    [PROMPT_GEN] 0.000s
+    [LLM_CALL] kwargs=0.000s | API=37.37s | extract=0.0000s | regex=0.0002s | pydantic=0.000s | TOTAL=37.37s
+    [MODEL_DUMP] 0.000s
+[23:47:46] [Sample 1] ✓ information_ethics SUCCESS (attempt=1) [prompt=0.00s | llm=37.37s | dump=0.000s | TOTAL=37.37s]
+    [LLM_CALL] kwargs=0.000s | API=54.92s | extract=0.0000s | regex=0.0000s | pydantic=0.000s | TOTAL=54.92s
+    [MODEL_DUMP] 0.000s
+[23:48:03] [Sample 1] ✓ format_style SUCCESS (attempt=1) [prompt=0.00s | llm=54.92s | dump=0.000s | TOTAL=54.92s]
+    [LLM_CALL] kwargs=0.000s | API=61.90s | extract=0.0000s | regex=0.0000s | pydantic=0.000s | TOTAL=61.90s
+    [MODEL_DUMP] 0.000s
+[23:48:10] [Sample 1] ✓ structural_coherence SUCCESS (attempt=1) [prompt=0.00s | llm=61.90s | dump=0.000s | TOTAL=61.90s]
+    [LLM_CALL] kwargs=0.000s | API=69.03s | extract=0.0000s | regex=0.0000s | pydantic=0.000s | TOTAL=69.03s
+    [MODEL_DUMP] 0.000s
+[23:48:17] [Sample 1] ✓ request_fulfillment SUCCESS (attempt=1) [prompt=0.00s | llm=69.03s | dump=0.000s | TOTAL=69.03s]
+    [LLM_CALL] kwargs=0.000s | API=83.02s | extract=0.0000s | regex=0.0000s | pydantic=0.000s | TOTAL=83.02s
+    [MODEL_DUMP] 0.000s
+[23:48:31] [Sample 1] ✓ analytical_soundness SUCCESS (attempt=1) [prompt=0.00s | llm=83.02s | dump=0.000s | TOTAL=83.02s]
+
+============================================================
+⏱️  EVALUATION COMPLETED in 83.03s
+============================================================
+💾 SAVING PER-SAMPLE RESULTS
+============================================================
+   ✓ Sample 0001 (score=6.37) [merge=0.000s | valid=0.0001s | avg=0.000s | dict=0.0000s | json=0.002s | write=0.0005s | TOTAL=0.003s]
+
+============================================================
+✅ COMPLETE
+   Samples requested : 1
+   Samples processed : 1
+   Evaluation time   : 83.03s
+   Total duration    : 1m 23s
+   Output directory  : output/csai/gpt5.2_fast/others
+============================================================
+
+🧹 Cleaning up 2 background tasks...
+✅ Cleanup complete
+🔚 Script finished
+
+=== [gpt5.2_fast] 3️⃣ run_score_integration.py ===
+✅ others/summary.json saved → output/csai/gpt5.2_fast/others/summary.json
+✅ fact/summary.json saved → output/csai/gpt5.2_fast/fact/summary.json
+✅ final.json saved → output/csai/gpt5.2_fast/final.json
+✅ sample saved → output/csai/gpt5.2_fast/final/0001.json

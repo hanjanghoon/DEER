@@ -1,0 +1,21 @@
+{
+  "criteria_avgs": {
+    "information_integrity": {
+      "claim_factuality": 5.65,
+      "citation_validity": 5.42,
+      "reference_accuracy": 7.5,
+      "reference_quality": 8.75,
+      "reference_diversity": 8.2
+    },
+    "information_sufficiency": {
+      "source_support": 8.7,
+      "information": 5.0,
+      "citations": 2.0,
+      "references": 1.0
+    }
+  },
+  "score_avgs": {
+    "information_integrity": 7.1,
+    "information_sufficiency": 4.17
+  }
+}

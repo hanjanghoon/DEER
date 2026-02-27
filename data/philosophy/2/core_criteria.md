@@ -1,0 +1,14 @@
+1. Conceptual Clarity and Theoretical Grounding
+The paper must define Rawls’ concept of reciprocity precisely within the framework of justice as fairness. It must explain how reciprocity relates to the difference principle, fair equality of opportunity, and the duty of civility. The paper should distinguish between moral reciprocity (mutual respect and cooperation) and institutional reciprocity (fair distribution of burdens and benefits). Definitions must be precise, avoiding conflation with mere exchange or utilitarian balance.
+
+2. Application to Poverty and Structural Inequality
+The analysis must examine how Rawls’ principle of reciprocity is applied under unequal socioeconomic conditions. It should explore whether limited resources morally exempt individuals from reciprocal civic duties or simply alter the fair terms under which reciprocity can occur. The paper must connect this discussion to Rawls’ treatment of basic structure and social primary goods.
+
+3. Philosophical Interpretation and Critique
+The paper must critically assess whether reciprocity is normatively valid in conditions of deprivation. It should provide a comparison with alternative theories, such as egalitarian, libertarian, and communitarian readings, on whether poverty weakens the reciprocity norm. The analysis should determine if Rawlsian reciprocity requires revision or reinterpretation to remain justifiable in non-ideal contexts.
+
+4. Integration with Broader Rawlsian Framework
+The paper must situate reciprocity within Rawls’ overall architecture: the original position, veil of ignorance, and difference principle. It should explain how these constructs inform expectations of fairness and moral reciprocity, and whether those expectations are sustainable under real-world inequality. The paper must demonstrate engagement with primary Rawlsian texts (A Theory of Justice, Justice as Fairness: A Restatement) and secondary scholarship that discusses reciprocity, obligation, and justice under inequality. Citations should be integrated analytically, showing how prior interpretations support or challenge the paper’s thesis.
+
+5. Normative Implications and Critical Reflection
+The conclusion must articulate the philosophical and ethical implications of the findings. The paper should address whether Rawlsian reciprocity remains binding in non-ideal conditions and how this affects the moral legitimacy of civic obligation in societies with persistent poverty. The conclusion should link theoretical insights to contemporary issues such as welfare, taxation, or civic participation among disadvantaged groups.

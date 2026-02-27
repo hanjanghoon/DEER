@@ -1,0 +1,3 @@
+"Write an academic research-style report on the computational complexity of the parameterized counting problem CountAns. The problem is defined by the formula φₖ(x₁,…,xₖ), which in a graph G expresses the existence of a vertex y connected to all of the chosen vertices x₁,…,xₖ.
+
+The report should investigate the position of CountAns within both classical and parameterized counting complexity, discuss its theoretical relevance, and consider how it relates to broader families of graph and query evaluation problems. The discussion should remain exploratory, guiding possible directions of analysis, drawing on conceptual reasoning, comparisons, and literature, but without presenting explicit proofs or fixed classifications."

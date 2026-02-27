@@ -1,0 +1,14 @@
+Comparative Auditory Framework
+The paper must define the concept of infrasound (frequencies below 20 Hz) and describe the physiological mechanisms that enable or limit detection in different species. It must contrast cochlear length, basilar membrane stiffness, and neural phase-locking capacity among mammals and fish, showing how these parameters determine hearing range. The paper should include quantitative hearing range data for humans, dogs, bats, herring, and whales.
+
+Methodological and Theoretical Basis
+The paper must explain how auditory thresholds are measured experimentally (e.g., behavioral audiograms, electrophysiological recordings, or otoacoustic emissions). It must evaluate how frequency limits are constrained by both ear anatomy and medium properties (air vs. water density and impedance). The paper should reason why whales, with large cochleae and fluid-conducting systems, can detect infrasonic vibrations that would be imperceptible in air.
+
+Evolutionary and Functional Interpretation
+The paper must analyze the evolutionary rationale for infrasound sensitivity in whales, linking it to long-range communication, navigation, and social coordination. It should discuss why terrestrial species like dogs and bats evolved toward ultrasound sensitivity instead, and why herring detect high-frequency signals for predator avoidance but not infrasound. The analysis must evaluate selective pressures in aquatic versus terrestrial environments (e.g., signal propagation in water vs. air, communication range, predator detection) and must connect each species’ ecological niche to its auditory specialization.
+
+Biological Signal Detection Feasibility
+The paper must assess whether human muscle twitches generate acoustic energy detectable by any species’ hearing range. It should use approximate amplitude and frequency values to estimate detectability thresholds relative to background noise. The reasoning must conclude that only species with extreme low-frequency sensitivity (such as large whales) could plausibly detect such vibrations.
+
+Broader Implications and Future Directions
+The paper must consider what infrasound detection reveals about the limits of sensory evolution and potential applications in bio-inspired acoustic technologies.  It should discuss broader implications for sensory ecology, such as how environmental constraints shape perceptual capacities, and identify open questions about the biophysical limits of low-frequency perception.The conclusion must integrate physiological, ecological, and evolutionary perspectives to explain why infrasound detection is rare and specialized.

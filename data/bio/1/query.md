@@ -1,0 +1,3 @@
+Write an empirical research paper on the use of geometric morphometrics for constructing morphological phylogenies using Maximum Parsimony, and on how these morphological trees compare in structure and robustness to molecular phylogenies.
+
+The paper should analyze how morphological traits derived from shape data can be encoded for parsimony analysis, how congruence between morphological and molecular trees can be quantitatively evaluated, and what biological or methodological factors influence agreement or conflict between them. The paper should include a focused discussion on cases involving recently diverged species or cryptic taxa, addressing the limits of morphological resolution and implications for evolutionary inference.

@@ -1,0 +1,15 @@
+1. Foundations and Assumptions
+The report must explicitly state the setting: least-squares regression with predictors x_ij, response y_i, an unpenalized intercept alpha, and coefficients beta_j. Include formal statements of both problems with notation: constrained $\min_{\alpha,\beta} \tfrac12\|y-X\beta-\alpha\mathbf{1}\|_2^2 \ \text{s.t.}\ \|\beta\|_1\le t$ and penalized $\min_{\alpha,\beta} \tfrac12\|y-X\beta-\alpha\mathbf{1}\|_2^2+\lambda\|\beta\|_1$. It should explain that the penalized objective is convex and that the L1-ball constraint defines a closed, convex feasible region with at least one feasible point. Assumptions required for convex analysis must be listed, and Slater’s condition should be invoked where applicable to justify strong duality between the constrained and penalized formulations. It should declare preprocessing/scaling conventions for $X$ and $y$; justify existence of minimizers (compact feasible set or coercivity) in addition to convexity/closedness.
+
+2. Lagrangian and KKT Mapping
+The report must show how the constrained problem can be expressed through its Lagrangian. The Karush–Kuhn–Tucker conditions should be written conceptually, including primal feasibility, dual feasibility, complementary slackness, and stationarity. The subgradient of the L1 norm should be used to connect the constraint radius t with the penalty parameter lambda. This establishes when and how one formulation can correspond to the other.
+There should be an explicit complementary slackness $\lambda(\|\beta\|_1 - t)=0$, treatment of zero coefficients via $\partial|\beta_j|=[-1,1]$, and a clear distinction between binding ($\lambda>0$) and slack ($\lambda=0$) regimes when relating $t$ and $\lambda$.
+
+3. Solution Path Properties
+Analyze the Lasso path $\beta(\lambda)$ with attention to continuity and generic piecewise linearity, explaining how these features support a monotone, segment-wise correspondence between $t$ and $\lambda$ when the constraint binds, while noting that active-set changes (kinks) can render the mapping set-valued and may prevent a strict one-to-one relationship.
+
+4. Edge Cases and Non-Uniqueness
+Treat collinearity and rank deficiency explicitly, noting that loss strictly convex in $X\beta$ does not imply strict convexity in $\beta$; and what does that imply in terms of the existence of unique solutions. Interpret equivalence in terms of attainable fitted values $X\beta$ when multiple minimizers exist, make clear that $\alpha$ is unpenalized and how centering choices affect stationarity, and include a minimal constructed example (analytical or numerical) that illustrates non-uniqueness or a slack/binding transition.
+
+5. Concluding Analysis
+Synthesize the findings by enumerating the precise conditions under which the constrained and penalized formulations yield overlapping solution sets and the concrete failure modes (non-binding constraints, degeneracy, non-uniqueness), avoiding universal claims; where numerical checks are presented, support statements with quantitative diagnostics such as KKT residual norms and primal–dual gaps and report the solver and tolerance settings used.

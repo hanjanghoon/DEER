@@ -1,0 +1,976 @@
+{
+  "sample_id": 1,
+  "score_avgs": {
+    "integrity": 7.1,
+    "sufficiency": 4.17
+  },
+  "criteria_avgs": {
+    "integrity": {
+      "claim_factuality": 5.65,
+      "citation_validity": 5.42,
+      "reference_accuracy": 7.5,
+      "reference_quality": 8.75,
+      "reference_diversity": 8.2
+    },
+    "sufficiency": {
+      "source_support": 8.7,
+      "information": 5.0,
+      "citations": 2.0,
+      "references": 1.0
+    }
+  },
+  "scores": {
+    "integrity": {
+      "claim_factuality": {
+        "external_claim_accuracy": 5.65
+      },
+      "citation_validity": {
+        "citation_accuracy": 5.42
+      },
+      "reference_accuracy": {
+        "supported_per_shown": 7.5
+      },
+      "reference_quality": {
+        "reproducibility": 10.0,
+        "reliability": 7.5
+      },
+      "reference_diversity": {
+        "diversity_hhi": 8.200692041522492
+      }
+    },
+    "sufficiency": {
+      "source_support": {
+        "externally_verifiable_claims_ratio": 8.7
+      },
+      "information": {
+        "information": 5
+      },
+      "citations": {
+        "citations": 2
+      },
+      "references": {
+        "references": 1
+      }
+    }
+  },
+  "raw": {
+    "raw": {
+      "claim_metrics": {
+        "total_claims": 83,
+        "claim_type_counts": {
+          "F": 4,
+          "E": 46,
+          "D": 10,
+          "A": 9,
+          "B": 11,
+          "C": 3
+        },
+        "claims": [
+          {
+            "claim_type": "F",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "A",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "A",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "A",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "B",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "B",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "A",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "B",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "F",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "F",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "F",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "A",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "B",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "B",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "B",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "B",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "B",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "B",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "E",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "E",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": true,
+            "is_internal": false,
+            "is_external": false
+          },
+          {
+            "claim_type": "A",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "A",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "B",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "A",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "B",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "A",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "D",
+            "result": "unverified",
+            "supported": false,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": true,
+            "is_external": false
+          },
+          {
+            "claim_type": "C",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "C",
+            "result": "not_supported",
+            "supported": false,
+            "error": false,
+            "is_numeric": true,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          },
+          {
+            "claim_type": "C",
+            "result": "supported",
+            "supported": true,
+            "error": false,
+            "is_numeric": false,
+            "is_common": false,
+            "is_internal": false,
+            "is_external": true
+          }
+        ]
+      },
+      "citation_metrics": {
+        "num_supported": 13,
+        "num_error_citations": 0,
+        "num_citations": 24
+      },
+      "reference_metrics": {
+        "num_references": 4,
+        "num_unique_references": 4,
+        "num_supported": 3,
+        "num_used": 4,
+        "num_error": 0,
+        "num_reliable": 3,
+        "supported_references": [
+          "https://arxiv.org/abs/2001.08361",
+          "https://arxiv.org/abs/2205.14135",
+          "https://arxiv.org/abs/1706.03762"
+        ],
+        "used_references": [
+          "https://arxiv.org/abs/2001.08361",
+          "https://arxiv.org/abs/2205.14135",
+          "https://arxiv.org/abs/1706.03762",
+          "https://arxiv.org/abs/2009.06732"
+        ],
+        "error_references": [],
+        "cited_counts": {
+          "https://arxiv.org/abs/1706.03762": 16,
+          "https://arxiv.org/abs/2205.14135": 4,
+          "https://arxiv.org/abs/2001.08361": 7,
+          "https://arxiv.org/abs/2009.06732": 3
+        },
+        "citations_mean": 7.5,
+        "citations_std": 5.123475382979799,
+        "supported_cited_counts": {
+          "https://arxiv.org/abs/1706.03762": 9,
+          "https://arxiv.org/abs/2001.08361": 7,
+          "https://arxiv.org/abs/2205.14135": 1
+        },
+        "balance_supported_0_10": 8.200692041522492
+      }
+    },
+    "integrity": {
+      "claim_factuality": {
+        "claim_accuracy": 0.8734177215189873,
+        "external_claim_accuracy": 0.5652173913043478,
+        "external_numeric_claim_accuracy": 0.25
+      },
+      "citation_validity": {
+        "citation_accuracy": 0.5416666666666666
+      },
+      "reference_accuracy": {
+        "supported_per_shown": 0.75,
+        "supported_per_used": 0.75,
+        "used_per_shown": 1.0
+      },
+      "reference_quality": {
+        "reproducibility": 1.0,
+        "reliability": 0.75
+      },
+      "reference_diversity": {
+        "unique_reference": 0.23076923076923078,
+        "citations_CV": 0.6831300510639732,
+        "diversity_hhi": 8.200692041522492
+      }
+    },
+    "sufficiency": {
+      "source_support": {
+        "verified_claims_ratio": 0.9166666666666666,
+        "externally_verifiable_claims_ratio": 0.8695652173913043,
+        "average_citations_per_claim": 1.2
+      },
+      "information": 69,
+      "citations": 13,
+      "references": 3
+    }
+  }
+}

@@ -1,0 +1,39 @@
+You are an expert fact-checker. Verify the following claims against the provided context.
+Be extremely strict. High precision is required.
+
+For each claim, determine if it is supported by the context.
+Result should be based on **semantic meaning**, not just keyword matching. If the text implies the claim is true, mark it as supported.
+
+**Verification Result (`result`)**:
+- **supported**: The text explicitly states or clearly implies the claim is true.
+- **conflict**: The text explicitly contradicts the claim.
+- **not_supported**: The text does not contain enough information.
+- **error**: Access/processing error (4xx/5xx, captcha, paywall, etc.)
+
+[Error Cases — Details]
+- Set result to "error" in the following cases:
+  - HTTP 4xx/5xx errors
+  - Access restrictions such as Captcha, Paywall, Authentication Required
+  - Other processing error messages
+- Briefly describe the specific error cause in explanation (e.g., "404 Not Found", "paywall restriction").
+
+[Document Reliability — Top-Level Fields]
+- **reliable** (true/false):
+  - Evaluate whether the entire URL is from a trustworthy source
+  - Example 1: Official statistics, academic journals, authoritative institutions → true
+  - Example 2: Personal blogs, social media posts, etc. → false
+- **reliable_explanation** (string or null):
+  - Rationale for reliability judgment (optional)
+
+# Examples:
+Claim: "GA+ prevents degradation."
+Context: "Guanidinium (GA+) ... helps passivate defects, stabilizing the structure against degradation."
+Result: supported
+
+# url: {url}
+
+# claims:
+{claims}
+
+# Context:
+{context}

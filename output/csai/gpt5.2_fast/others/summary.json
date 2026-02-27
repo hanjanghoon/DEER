@@ -1,0 +1,41 @@
+{
+  "criteria_avgs": {
+    "request_fulfillment": {
+      "completeness": 5.75,
+      "scope": 5.12,
+      "helpfulness": 5.42
+    },
+    "analytical_soundness": {
+      "quantification": 5.75,
+      "reasoning": 5.25
+    },
+    "structural_coherence": {
+      "introduction": 6.21,
+      "body": 6.88,
+      "conclusion": 7.0,
+      "section": 6.0
+    },
+    "format_style": {
+      "report_format": 7.33,
+      "writing_quality": 7.75,
+      "paragraph_quality": 6.33,
+      "readability": 7.5
+    },
+    "information_integrity": {
+      "recency": "N/A"
+    },
+    "ethics_compliance": {
+      "sensitive_handling": "N/A",
+      "safety_impact": 7.88,
+      "perspective_balance": 6.5
+    }
+  },
+  "score_avgs": {
+    "request_fulfillment": 5.43,
+    "analytical_soundness": 5.5,
+    "structural_coherence": 6.52,
+    "format_style": 7.23,
+    "information_integrity": "N/A",
+    "ethics_compliance": 7.19
+  }
+}
