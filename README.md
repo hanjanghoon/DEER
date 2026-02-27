@@ -5,7 +5,7 @@ DEER is a benchmark for evaluating deep research agents on expert report generat
 📄 Paper: [https://arxiv.org/abs/2512.17776](https://arxiv.org/abs/2512.17776)
 
 <p align="center">
-  <img src="img.png" width="750"/>
+  <img src="img.png" width="100%"/>
 </p>
 
 DEER provides a systematic and interpretable evaluation framework for expert-level long-form research reports:
