@@ -4,6 +4,19 @@ DEER is a benchmark for evaluating deep research agents on expert report generat
 
 📄 Paper: [https://arxiv.org/abs/2512.17776](https://arxiv.org/abs/2512.17776)
 
+<p align="center">
+  <img src="img.png" width="750"/>
+</p>
+
+DEER provides a systematic and interpretable evaluation framework for expert-level long-form research reports:
+
+* Expert-defined hierarchical taxonomy (7 dimensions, 25 sub-dimensions)
+* 101 fixed rubric items for structured LLM-based scoring
+* Task-specific Expert Evaluation Guidance
+* Report-wide claim verification with implicit citation back-tracking
+
+DEER enables fine-grained, domain-aware diagnostics beyond aggregate scoring.
+
 ---
 
 ## Installation
