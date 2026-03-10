@@ -59,7 +59,7 @@ bash run_domain_all.sh
 
 ## Experimental Results
 
-| Model | Req. Comp. | Evid. Valid. | Struct. Cons. | Narr. Style | Info. Int. | Info. Suff. | Ethics | Mean |
+| Model | Requirement Completeness | Evidence Validity | Structural Consistency | Narrative Style | Information Integrity | Information Sufficiency | Ethics | Mean |
 |------|------------|------------|------------|------------|------------|------------|------------|------|
 | **General LLM** |||||||||
 | qwen3-235b-fast | 6.10 | 6.59 | 9.04 | 8.66 | 3.30 | 4.40 | 8.58 | 6.67 |
