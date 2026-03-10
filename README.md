@@ -56,7 +56,6 @@ bash run_domain_all.sh
 ```
 
 ---
-
 ## Experimental Results
 
 | Model | Request Fulfillment | Analytic Soundness | Structural Coherence | Format & Style | Information Integrity | Information Sufficiency | Ethics | Mean |
