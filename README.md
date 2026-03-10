@@ -57,6 +57,16 @@ bash run_domain_all.sh
 
 ---
 
+## Experimental Results
+
+<p align="center">
+  <img src="img/deer_results_readme.png" width="100%" alt="DEER benchmark results table"/>
+</p>
+
+> Highlighted cells indicate the best score in each column.
+
+---
+
 ## License
 
 * Code: MIT
