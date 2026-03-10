@@ -60,7 +60,7 @@ bash run_domain_all.sh
 ## Experimental Results
 
 <p align="center">
-  <img src="img/deer_results.png" width="100%" alt="DEER benchmark results table"/>
+  <img src="deer_results.png" width="100%" alt="DEER benchmark results table"/>
 </p>
 
 > Highlighted cells indicate the best score in each column.
