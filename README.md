@@ -57,30 +57,230 @@ bash run_domain_all.sh
 
 ---
 
-## Experimental Results
+<h2>Experimental Results</h2>
 
-| Model | Request Fulfillment | Analytic Soundness | Structural Coherence | Format & Style | Information Integrity | Information Sufficiency | Ethics | Mean |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| **`General LLMs`** |||||||||
-| `Qwen3-235B Fast` | 4.51 | 5.02 | 6.09 | 7.49 | 1.24 | 4.20 | 7.19 | 5.11 |
-| `Gemini 2.5 Flash Fast` | 4.64 | 5.33 | 6.55 | 7.85 | 1.30 | 3.99 | 7.52 | 5.31 |
-| `Claude Opus 4.5 Fast` | 4.94 | 5.48 | 6.54 | 7.99 | 2.29 | 4.50 | 7.78 | 5.65 |
-| `GPT-5 Fast` | 4.11 | 4.75 | 5.84 | 7.21 | 1.05 | 3.13 | 7.30 | 4.77 |
-| **`LLMs + Reasoning`** |||||||||
-| `Qwen3-235B + Reasoning` | 5.00 | 5.33 | 6.64 | 7.88 | 1.12 | 3.90 | 7.38 | 5.32 |
-| `Gemini 2.5 Pro + Reasoning` | 4.88 | 5.81 | 6.99 | 8.09 | 2.23 | 4.40 | 7.73 | 5.73 |
-| `Claude Opus 4.5 + Reasoning` | 4.96 | 5.48 | 6.68 | 8.10 | 2.27 | 4.22 | 7.73 | 5.63 |
-| `GPT-5 + Reasoning` | **5.57** | **6.18** | **7.00** | 8.06 | 2.11 | 4.16 | _8.08_ | 5.88 |
-| **`LLMs + Reasoning + WebSearch`** |||||||||
-| `Qwen3-235B + Reasoning + WebSearch` | 4.05 | 4.34 | 5.68 | 6.83 | 5.22 | 5.45 | 7.06 | 5.52 |
-| `Claude Opus 4.5 + Reasoning + WebSearch` | 4.52 | 5.13 | 5.99 | 7.41 | _7.03_ | _7.62_ | 7.37 | 6.44 |
-| `GPT-5 + Reasoning + WebSearch` | **5.57** | _6.08_ | 6.97 | **8.15** | 5.63 | 6.17 | **8.11** | **6.67** |
-| **`Deep Research`** |||||||||
-| `WebThinker (Li et al., 2025b)` | 4.11 | 4.64 | 5.51 | 7.35 | 6.21 | 6.40 | 7.13 | 5.91 |
-| `Qwen3-235B Deep Research` | 4.13 | 4.69 | 4.85 | 7.06 | 6.55 | **7.90** | 7.43 | 6.09 |
-| `Gemini 2.5 Pro Deep Research` | 4.71 | 5.37 | 6.25 | 7.59 | 6.01 | 7.61 | 7.39 | 6.42 |
-| `Claude Opus 4.5 Deep Research` | 4.53 | 5.22 | 5.69 | 7.22 | 6.04 | 5.66 | 7.57 | 5.99 |
-| `OpenAI Deep Research` | 4.67 | 5.29 | 6.28 | 7.66 | **7.14** | 6.89 | 7.48 | 6.49 |
+<table>
+<thead>
+<tr>
+<th align="left">Model</th>
+<th align="right">Request Fulfillment</th>
+<th align="right">Analytic Soundness</th>
+<th align="right">Structural Coherence</th>
+<th align="right">Format &amp; Style</th>
+<th align="right">Information Integrity</th>
+<th align="right">Information Sufficiency</th>
+<th align="right">Ethics</th>
+<th align="right">Mean</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr><td colspan="9"><b>General LLMs</b></td></tr>
+
+<tr>
+<td style="white-space: nowrap;">Qwen3-235B Fast</td>
+<td align="right">4.51</td>
+<td align="right">5.02</td>
+<td align="right">6.09</td>
+<td align="right">7.49</td>
+<td align="right">1.24</td>
+<td align="right">4.20</td>
+<td align="right">7.19</td>
+<td align="right">5.11</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">Gemini 2.5 Flash Fast</td>
+<td align="right">4.64</td>
+<td align="right">5.33</td>
+<td align="right">6.55</td>
+<td align="right">7.85</td>
+<td align="right">1.30</td>
+<td align="right">3.99</td>
+<td align="right">7.52</td>
+<td align="right">5.31</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">Claude Opus 4.5 Fast</td>
+<td align="right">4.94</td>
+<td align="right">5.48</td>
+<td align="right">6.54</td>
+<td align="right">7.99</td>
+<td align="right">2.29</td>
+<td align="right">4.50</td>
+<td align="right">7.78</td>
+<td align="right">5.65</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">GPT-5 Fast</td>
+<td align="right">4.11</td>
+<td align="right">4.75</td>
+<td align="right">5.84</td>
+<td align="right">7.21</td>
+<td align="right">1.05</td>
+<td align="right">3.13</td>
+<td align="right">7.30</td>
+<td align="right">4.77</td>
+</tr>
+
+
+<tr><td colspan="9"><b>LLMs + Reasoning</b></td></tr>
+
+<tr>
+<td style="white-space: nowrap;">Qwen3-235B + Reasoning</td>
+<td align="right">5.00</td>
+<td align="right">5.33</td>
+<td align="right">6.64</td>
+<td align="right">7.88</td>
+<td align="right">1.12</td>
+<td align="right">3.90</td>
+<td align="right">7.38</td>
+<td align="right">5.32</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">Gemini 2.5 Pro + Reasoning</td>
+<td align="right">4.88</td>
+<td align="right">5.81</td>
+<td align="right">6.99</td>
+<td align="right">8.09</td>
+<td align="right">2.23</td>
+<td align="right">4.40</td>
+<td align="right">7.73</td>
+<td align="right">5.73</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">Claude Opus 4.5 + Reasoning</td>
+<td align="right">4.96</td>
+<td align="right">5.48</td>
+<td align="right">6.68</td>
+<td align="right">8.10</td>
+<td align="right">2.27</td>
+<td align="right">4.22</td>
+<td align="right">7.73</td>
+<td align="right">5.63</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">GPT-5 + Reasoning</td>
+<td align="right"><b>5.57</b></td>
+<td align="right"><b>6.18</b></td>
+<td align="right"><b>7.00</b></td>
+<td align="right">8.06</td>
+<td align="right">2.11</td>
+<td align="right">4.16</td>
+<td align="right"><u>8.08</u></td>
+<td align="right">5.88</td>
+</tr>
+
+
+<tr><td colspan="9"><b>LLMs + Reasoning + WebSearch</b></td></tr>
+
+<tr>
+<td style="white-space: nowrap;">Qwen3-235B + Reasoning + WebSearch</td>
+<td align="right">4.05</td>
+<td align="right">4.34</td>
+<td align="right">5.68</td>
+<td align="right">6.83</td>
+<td align="right">5.22</td>
+<td align="right">5.45</td>
+<td align="right">7.06</td>
+<td align="right">5.52</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">Claude Opus 4.5 + Reasoning + WebSearch</td>
+<td align="right">4.52</td>
+<td align="right">5.13</td>
+<td align="right">5.99</td>
+<td align="right">7.41</td>
+<td align="right"><u>7.03</u></td>
+<td align="right"><u>7.62</u></td>
+<td align="right">7.37</td>
+<td align="right">6.44</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">GPT-5 + Reasoning + WebSearch</td>
+<td align="right"><b>5.57</b></td>
+<td align="right"><u>6.08</u></td>
+<td align="right">6.97</td>
+<td align="right"><b>8.15</b></td>
+<td align="right">5.63</td>
+<td align="right">6.17</td>
+<td align="right"><b>8.11</b></td>
+<td align="right"><b>6.67</b></td>
+</tr>
+
+
+<tr><td colspan="9"><b>Deep Research</b></td></tr>
+
+<tr>
+<td style="white-space: nowrap;">WebThinker (Li et al., 2025b)</td>
+<td align="right">4.11</td>
+<td align="right">4.64</td>
+<td align="right">5.51</td>
+<td align="right">7.35</td>
+<td align="right">6.21</td>
+<td align="right">6.40</td>
+<td align="right">7.13</td>
+<td align="right">5.91</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">Qwen3-235B Deep Research</td>
+<td align="right">4.13</td>
+<td align="right">4.69</td>
+<td align="right">4.85</td>
+<td align="right">7.06</td>
+<td align="right">6.55</td>
+<td align="right"><b>7.90</b></td>
+<td align="right">7.43</td>
+<td align="right">6.09</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">Gemini 2.5 Pro Deep Research</td>
+<td align="right">4.71</td>
+<td align="right">5.37</td>
+<td align="right">6.25</td>
+<td align="right">7.59</td>
+<td align="right">6.01</td>
+<td align="right">7.61</td>
+<td align="right">7.39</td>
+<td align="right">6.42</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">Claude Opus 4.5 Deep Research</td>
+<td align="right">4.53</td>
+<td align="right">5.22</td>
+<td align="right">5.69</td>
+<td align="right">7.22</td>
+<td align="right">6.04</td>
+<td align="right">5.66</td>
+<td align="right">7.57</td>
+<td align="right">5.99</td>
+</tr>
+
+<tr>
+<td style="white-space: nowrap;">OpenAI Deep Research</td>
+<td align="right">4.67</td>
+<td align="right">5.29</td>
+<td align="right">6.28</td>
+<td align="right">7.66</td>
+<td align="right"><b>7.14</b></td>
+<td align="right">6.89</td>
+<td align="right">7.48</td>
+<td align="right">6.49</td>
+</tr>
+
+</tbody>
+</table>
 
 ---
 
