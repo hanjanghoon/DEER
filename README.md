@@ -79,7 +79,7 @@ bash run_domain_all.sh
 <tr><td colspan="9"><b>General LLMs</b></td></tr>
 
 <tr>
-<td style="white-space: nowrap;">Qwen3-235B Fast</td>
+<td style="white-space: nowrap;">Qwen3-235B No Reasoning</td>
 <td align="right">4.51</td>
 <td align="right">5.02</td>
 <td align="right">6.09</td>
@@ -91,7 +91,7 @@ bash run_domain_all.sh
 </tr>
 
 <tr>
-<td style="white-space: nowrap;">Gemini 2.5 Flash Fast</td>
+<td style="white-space: nowrap;">Gemini 2.5 Flash No Reasoning</td>
 <td align="right">4.64</td>
 <td align="right">5.33</td>
 <td align="right">6.55</td>
@@ -103,7 +103,7 @@ bash run_domain_all.sh
 </tr>
 
 <tr>
-<td style="white-space: nowrap;">Claude Opus 4.5 Fast</td>
+<td style="white-space: nowrap;">Claude Opus 4.5 No Reasoning</td>
 <td align="right">4.94</td>
 <td align="right">5.48</td>
 <td align="right">6.54</td>
@@ -115,7 +115,7 @@ bash run_domain_all.sh
 </tr>
 
 <tr>
-<td style="white-space: nowrap;">GPT-5 Fast</td>
+<td style="white-space: nowrap;">GPT-5 No Reasoning</td>
 <td align="right">4.11</td>
 <td align="right">4.75</td>
 <td align="right">5.84</td>
