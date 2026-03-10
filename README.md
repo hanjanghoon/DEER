@@ -121,7 +121,6 @@ bash run_domain_all.sh
       <td align="right">7.30</td>
       <td align="right">4.77</td>
     </tr>
-
     <tr>
       <td colspan="9"><b>LLMs + Reasoning</b></td>
     </tr>
@@ -169,7 +168,6 @@ bash run_domain_all.sh
       <td align="right"><u>8.08</u></td>
       <td align="right">5.88</td>
     </tr>
-
     <tr>
       <td colspan="9"><b>LLMs + Reasoning + WebSearch</b></td>
     </tr>
@@ -206,7 +204,6 @@ bash run_domain_all.sh
       <td align="right"><b>8.11</b></td>
       <td align="right"><b>6.67</b></td>
     </tr>
-
     <tr>
       <td colspan="9"><b>Deep Research</b></td>
     </tr>
