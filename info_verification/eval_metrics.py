@@ -89,22 +89,22 @@ def _hhi_from_counts(counts: list[int]) -> float:
 
 def _hhi_balance_score_0_10(counts: list[int]) -> float:
     """
-    HHI 기반 '균형(balance)' 점수.
-    - 입력 counts: 레퍼런스별 인용횟수(지원된 인용만 권장)
-    - 출력: 0~10 (10=완전 균등, 0=완전 몰빵)
-    레퍼런스 수(n)에 대해 정규화해 문서간 비교 가능하게 함.
+    HHI-based 'balance' score.
+    - Input counts: Citation frequency per reference (recommended only supported citations)
+    - Output: 0~10 (10=completely equal, 0=completely skewed)
+    Normalized against the number of references (n) for cross-document comparison.
     """
     counts = [c for c in counts if c > 0]
     n = len(counts)
     if n == 0:
         return 0.0
     if n == 1:
-        return 0.0  # 하나에 몰빵
+        return 0.0  # Skewed to one
 
     hhi = _hhi_from_counts(counts)
-    # HHI의 이론적 범위: [1/n, 1]
-    hhi_norm = (hhi - 1 / n) / (1 - 1 / n)  # 0(균등)~1(몰빵)
-    score = 10 * (1 - hhi_norm)             # 10(균등)~0(몰빵)
+    # Theoretical range of HHI: [1/n, 1]
+    hhi_norm = (hhi - 1 / n) / (1 - 1 / n)  # 0(equal)~1(skewed)
+    score = 10 * (1 - hhi_norm)             # 10(equal)~0(skewed)
     return float(max(0.0, min(10.0, score)))
 
 
@@ -118,8 +118,8 @@ def compute_reference_metrics(
 ) -> dict:
     context_metrics = {}
 
-    cited_counts: dict[str, int] = {}              # 모든 인용 시도(used) 카운트
-    supported_cited_counts: dict[str, int] = {}    # ✅ supported 인용만 카운트(다양성/균형 계산용)
+    cited_counts: dict[str, int] = {}              # Total citation attempts (used)
+    supported_cited_counts: dict[str, int] = {}    # ✅ Only supported citations (for diversity/balance)
 
     supported_references = set()
     used_references = set()
@@ -141,16 +141,16 @@ def compute_reference_metrics(
             if verification.reliable:
                 reliable_references.add(url)
 
-            # used counts/sets (기존 유지)
+            # used counts/sets (kept as is)
             cited_counts[url] = cited_counts.get(url, 0) + 1
             used_references.add(url)
 
-    # 기존 CV용 mean/std는 유지(원하면 나중에 제거 가능)
+    # Keep existing CV mean/std (can be removed later if desired)
     all_counts = list(cited_counts.values())
     citations_mean = float(np.mean(all_counts)) if all_counts else 0.0
     citations_std = float(np.std(all_counts)) if all_counts else 0.0
 
-    # ✅ supported-only balance (HHI 기반 0~10)
+    # ✅ supported-only balance (HHI-based 0~10)
     supported_counts = list(supported_cited_counts.values())
     balance_supported_0_10 = _hhi_balance_score_0_10(supported_counts)
 
@@ -171,9 +171,9 @@ def compute_reference_metrics(
         "citations_mean": citations_mean,
         "citations_std": citations_std,
 
-        # ✅ 새로 추가
-        "supported_cited_counts": supported_cited_counts,           # 디버깅용(선택)
-        "balance_supported_0_10": float(balance_supported_0_10),     # 핵심: supported-only 균형 점수
+        # ✅ Newly added
+        "supported_cited_counts": supported_cited_counts,           # For debugging (optional)
+        "balance_supported_0_10": float(balance_supported_0_10),     # Core: supported-only balance score
     })
 
     return context_metrics
@@ -245,7 +245,7 @@ def compute_metrics(
 
     citations_CV = reference_metrics["citations_std"] / reference_metrics["citations_mean"] if reference_metrics["citations_mean"] > 0 else 0.0
     
-  # ✅ 최종 diversity 점수: supported-only balance(0~10) × supported_per_shown(0~1)
+  # ✅ Final diversity score: supported-only balance(0~10) × supported_per_shown(0~1)
     reference_diversity_final_0_10 = reference_metrics["balance_supported_0_10"] 
     reference_diversity_final_0_10 = float(max(0.0, min(10.0, reference_diversity_final_0_10)))
 

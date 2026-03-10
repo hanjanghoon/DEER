@@ -154,7 +154,7 @@ async def fetch_webpage_jina_cached(url: str) -> str:
         "X-Timeout": "5",
         "X-With-Iframe": "true",
     }
-    async with aiohttp.ClientSession() as session: #jang 여기 고쳐야함
+    async with aiohttp.ClientSession() as session: # TODO(jang): needs fix
     # async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
         async with session.get(f"https://r.jina.ai/{url}", headers=headers) as response:
             if response.status == 200:

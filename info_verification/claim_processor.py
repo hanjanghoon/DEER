@@ -168,7 +168,7 @@ if __name__ == "__main__":
 
     for file in [
         "deep_research_samples/chatexaone_fast_1"
-    ]:  # , "testset/sample_02", "testset/sample_03"]:
+    ]:
         with open(f"{file}.md") as f:
             report_text = f.read()
             report_text, references_section = split_references(report_text)
@@ -184,7 +184,7 @@ if __name__ == "__main__":
         ]
         batch_size = 20
 
-        # 모든 배치들을 준비
+        # Prepare all batches
         batches = []
         for i in range(0, len(line_sentences), batch_size):
             batch_sentences = (
@@ -195,7 +195,7 @@ if __name__ == "__main__":
             if batch_sentences:
                 batches.append(batch_sentences)
 
-        # 비동기로 모든 배치를 동시에 처리
+        # Process all batches asynchronously
         async def process_all_batches():
             tasks = [
                 extract_claims(report_text, batch, model="gpt-5-mini")

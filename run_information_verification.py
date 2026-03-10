@@ -1,12 +1,4 @@
 #!/usr/bin/env python3
-"""
-make_report_score_fact_v2.py  (순서 보존판 + ethics_compliance 추가)
-────────────────────────────────────────────────────────────
-• compute_metrics 새 스키마 대응
-• 0-10 점수 변환
-• ethics_compliance (fair_use, direct_quote) 추가
-• (변경) summary.json 생성 제거 → 샘플별 JSON만 저장
-"""
 from __future__ import annotations
 
 import argparse, asyncio, json, re
@@ -18,7 +10,7 @@ from dotenv import load_dotenv
 from info_verification.eval_main import evaluate_report
 import nltk
 
-# ────────────────────────── 샘플 리스트 파서 ────────────────────────────────
+# ────────────────────────── Sample List Parser ────────────────────────────────
 def _parse_samples(arg: str) -> List[int]:
     """
     '1,2,5-8' → [1,2,5,6,7,8]
@@ -40,7 +32,7 @@ def _parse_samples(arg: str) -> List[int]:
             ids.append(int(t))
     return sorted(set(ids))
 
-# ────────────────────────── 1. metric 경로 매핑 ───────────────────────────────
+# ────────────────────────── 1. Metric Path Mapping ──────────────────────────────
 CRIT_MAP: Dict[str, Dict[str, Tuple[str, ...]]] = {
     # integrity
     "claim_factuality": {
@@ -57,7 +49,6 @@ CRIT_MAP: Dict[str, Dict[str, Tuple[str, ...]]] = {
         "reliability":  ("integrity", "reference_quality", "reliability"),
     },
     "reference_diversity": {
-        # "citations_CV": ("integrity", "reference_diversity", "citations_CV"),
         "diversity_hhi": ("integrity", "reference_diversity", "diversity_hhi"),
     },
     # sufficiency
@@ -67,18 +58,12 @@ CRIT_MAP: Dict[str, Dict[str, Tuple[str, ...]]] = {
     "information": {"information": ("sufficiency", "information")},
     "citations":   {"citations":   ("sufficiency", "citations")},
     "references":  {"references":  ("sufficiency", "references")},
-    # ethics_compliance
-    # "responsible_info": {
-    #     "fair_use": ("ethics_compliance", "responsible_info", "fair_use"),
-    #     "direct_quote": ("ethics_compliance", "responsible_info", "direct_quote"),
-    # },
 }
 
 INTEGRITY_CATS = ["claim_factuality","citation_validity","reference_accuracy","reference_quality","reference_diversity"]
 SUFFICIENCY_CATS = ["source_support","information","citations","references"]
-# ETHIC_CATS = ["responsible_info"]
 
-# ────────────────────────── 2. 점수 변환 헬퍼 ────────────────────────────────
+# ────────────────────────── 2. Score Conversion Helper ────────────────────────
 def _clip(v: float, lo: float, hi: float) -> float: return max(lo, min(hi, v))
 _AMOUNT_DIVISORS = {"information": 15, "citations": 10, "references": 4}
 
@@ -95,12 +80,10 @@ def _safe_get(d: dict, path: Tuple[str, ...]) -> Union[float, None]:
     except (KeyError, TypeError, ValueError):
         return None
 
-# ────────────────────────── 3. 샘플 평가 ──────────────────────────────────────
+# ────────────────────────── 3. Sample Evaluation ──────────────────────────────
 async def eval_and_score(sample_id: int, md_path: Path, eval_model: str) -> dict:
-    # fact_result = await evaluate_report(md_path.read_text(), batch_size=20, extract_model=eval_model, verify_model=eval_model)
     fact_result = await evaluate_report(md_path.read_text(), batch_size=20, extract_model="gpt-5-mini", verify_model="gpt-5-mini")
     raw = fact_result["metrics"]
-    # ethic_scores = raw.get('ethics_compliance', {}).get('responsible_info', {})
 
     scores, cat_avgs = {}, {}
     for cat in CRIT_MAP:
@@ -120,31 +103,25 @@ async def eval_and_score(sample_id: int, md_path: Path, eval_model: str) -> dict
 
     integ_av = {c: cat_avgs[c] for c in INTEGRITY_CATS if c in cat_avgs}
     suff_av  = {c: cat_avgs[c] for c in SUFFICIENCY_CATS if c in cat_avgs}
-    # ethic_values = list(ethic_scores.values()) if ethic_scores else []
-    # ethic_avg = round(sum(ethic_values) / len(ethic_values), 2) if ethic_values else "N/A"
 
     return {
         "sample_id": sample_id,
         "score_avgs": {
             "integrity": round(sum(integ_av.values())/len(integ_av), 2) if integ_av else "N/A",
             "sufficiency": round(sum(suff_av.values())/len(suff_av), 2)  if suff_av  else "N/A",
-            # "ethics_compliance": ethic_avg,
         },
         "criteria_avgs": {
             "integrity": integ_av, 
             "sufficiency": suff_av,
-            # "ethics_compliance": {"responsible_info": ethic_avg}
         },
         "scores": {
             "integrity": {k: scores[k] for k in INTEGRITY_CATS if k in scores},
             "sufficiency": {k: scores[k] for k in SUFFICIENCY_CATS if k in scores},
-            # "ethics_compliance": {"responsible_info": ethic_scores}
         },
         "raw": raw
     }
 
-# ────────────────────────── 4. 저장 (summary 제거) ───────────────────────────
-# ────────────────────────── 4. 저장 (summary 제거) ───────────────────────────
+# ────────────────────────── 4. Save Results ───────────────────────────────────
 async def main_async(args, sample_ids: List[int]):
     root = Path(args.root)
     out = (Path(args.output_root) / args.prefix / "fact").resolve()
@@ -157,7 +134,7 @@ async def main_async(args, sample_ids: List[int]):
     ]
     res = await asyncio.gather(*tasks)
 
-    # 샘플별 결과만 저장 (summary.json 생성 없음)
+    # Save results per sample (no summary.json created)
     for r in res:
         sid = r["sample_id"]
         out_path = out / f"{sid:04d}.json"
@@ -168,7 +145,7 @@ async def main_async(args, sample_ids: List[int]):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--prefix", default="gpt5_deep")
-    p.add_argument("--samples", type=str, default="1", help="샘플 번호 리스트 (예: '1,2,5-7')")
+    p.add_argument("--samples", type=str, default="1", help="Sample ID list (e.g., '1,2,5-7')")
     p.add_argument("--root", default="data/micro1_csai")
     p.add_argument("--output_root", default="output_test")
     p.add_argument("--env", default=".env")

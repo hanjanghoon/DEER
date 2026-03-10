@@ -5,14 +5,14 @@ import pickle
 import os
 from pathlib import Path
 
-# BM25 관련 임포트
+# BM25 imports
 try:
     from rank_bm25 import BM25Okapi
 except ImportError:
     BM25Okapi = None
 
 import litellm
-# OpenAI 임베딩
+# OpenAI Embedding
 import openai
 import tiktoken
 import numpy as np
@@ -20,19 +20,19 @@ import asyncio
 
 
 class EmbeddingCache:
-    """임베딩 결과를 캐시하는 클래스"""
+    """Class to cache embedding results"""
     
     def __init__(self, cache_dir: str = "embedding_cache"):
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(exist_ok=True)
     
     def _get_cache_key(self, text: str, model: str) -> str:
-        """텍스트와 모델명으로 캐시 키 생성"""
+        """Generate a cache key from text and model name"""
         content = f"{model}:{text}"
         return hashlib.md5(content.encode()).hexdigest()
     
     def get(self, text: str, model: str) -> Optional[List[float]]:
-        """캐시에서 임베딩 가져오기"""
+        """Get embedding from cache"""
         cache_key = self._get_cache_key(text, model)
         cache_file = self.cache_dir / f"{cache_key}.pkl"
         
@@ -41,12 +41,12 @@ class EmbeddingCache:
                 with open(cache_file, 'rb') as f:
                     return pickle.load(f)
             except Exception:
-                # 캐시 파일이 손상된 경우 무시
+                # Ignore if cache file is corrupted
                 pass
         return None
     
     def set(self, text: str, model: str, embedding: List[float]):
-        """캐시에 임베딩 저장"""
+        """Save embedding to cache"""
         cache_key = self._get_cache_key(text, model)
         cache_file = self.cache_dir / f"{cache_key}.pkl"
         
@@ -54,11 +54,11 @@ class EmbeddingCache:
             with open(cache_file, 'wb') as f:
                 pickle.dump(embedding, f)
         except Exception:
-            # 캐시 저장 실패는 무시
+            # Ignore cache save failures
             pass
 
 
-# 전역 캐시 인스턴스
+# Global cache instance
 _embedding_cache = EmbeddingCache()
 
 
@@ -75,16 +75,16 @@ class BM25ChunkSelector(ChunkSelector):
         selected_indices = set()
         bm25 = BM25Okapi([chunk.split() for chunk in chunks])
         
-        # 각 쿼리별로 top-k 청크 선택
+        # Select top-k chunks for each query
         for query in queries:
             scores = bm25.get_scores(query.split())
-            # 점수가 높은 순으로 인덱스 정렬
+            # Sort indices by descending score
             ranked_indices = np.argsort(scores)[::-1]
-            # 상위 k개 선택
+            # Select top-k
             for i in range(min(top_k, len(ranked_indices))):
                 selected_indices.add(ranked_indices[i])
         
-        # 원래 순서대로 정렬하여 청크 합치기
+        # Join chunks in their original order
         selected_indices = sorted(selected_indices)
         selected_chunks = [chunks[i] for i in selected_indices]
         # return '\n\n'.join(selected_chunks)
@@ -96,22 +96,22 @@ class OpenAIEmbeddingChunkSelector(ChunkSelector):
         self.model = model
 
     async def get_embedding(self, text: str) -> List[float]:
-        # 캐시에서 먼저 확인
+        # Check cache first
         cached_embedding = _embedding_cache.get(text, self.model)
         if cached_embedding is not None:
             return cached_embedding
         
-        # 캐시에 없으면 API 호출
+        # If not in cache, call API
         try:
             response = await litellm.aembedding(self.model, input=[text])
             embedding = response['data'][0]['embedding']
             
-            # 캐시에 저장
+            # Save to cache
             _embedding_cache.set(text, self.model, embedding)
             return embedding
         except Exception as e:
             print(f"Error getting OpenAI embedding: {e}")
-            return [0.0] * 1536  # 기본 차원
+            return [0.0] * 1536  # Default dimension
 
     def cosine_similarity(self, a, b):
         a = np.array(a)
@@ -121,20 +121,20 @@ class OpenAIEmbeddingChunkSelector(ChunkSelector):
     async def select(self, queries: List[str], chunks: List[str], top_k: int) -> str:
         selected_indices = set()
         
-        # 청크 임베딩 미리 계산
+        # Pre-calculate chunk embeddings
         chunk_embs = await asyncio.gather(*(self.get_embedding(chunk) for chunk in chunks))
 
-        # 각 쿼리별로 top-k 청크 선택
+        # Select top-k chunks for each query
         for query in queries:
             query_emb = await self.get_embedding(query)
             scores = [self.cosine_similarity(query_emb, emb) for emb in chunk_embs]
-            # 점수가 높은 순으로 인덱스 정렬
+            # Sort indices by descending score
             ranked_indices = np.argsort(scores)[::-1]
-            # 상위 k개 선택
+            # Select top-k
             for i in range(min(top_k, len(ranked_indices))):
                 selected_indices.add(ranked_indices[i])
         
-        # 원래 순서대로 정렬하여 청크 합치기
+        # Join chunks in their original order
         selected_indices = sorted(selected_indices)
         selected_chunks = [chunks[i] for i in selected_indices]
         return '\n\n'.join(selected_chunks)
@@ -151,27 +151,27 @@ class GeminiChunkSelector(ChunkSelector):
         return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
     
     async def get_embeddings_batch(self, texts: List[str], task_type: str = "SEMANTIC_SIMILARITY") -> List[List[float]]:
-        """배치로 임베딩 가져오기 (캐싱 포함)"""
+        """Get embeddings in batch (with caching)"""
         from google.genai import types
 
         embeddings = []
         texts_to_embed = []
         cache_indices = []
         
-        # 캐시 키에 task_type도 포함
+        # Include task_type in cache key
         cache_model_key = f"{self.model}_{task_type}"
         
-        # 캐시에서 먼저 확인
+        # Check cache first
         for i, text in enumerate(texts):
             cached_embedding = _embedding_cache.get(text, cache_model_key)
             if cached_embedding is not None:
                 embeddings.append(cached_embedding)
             else:
-                embeddings.append(None)  # 자리 표시자
+                embeddings.append(None)  # Placeholder
                 texts_to_embed.append(text)
                 cache_indices.append(i)
         
-        # 캐시되지 않은 텍스트들을 배치로 임베딩
+        # Embed uncached texts in batch
         if texts_to_embed:
             try:
                 result = self.client.models.embed_content(
@@ -182,7 +182,7 @@ class GeminiChunkSelector(ChunkSelector):
                 
                 batch_embeddings = [np.array(e.values).tolist() for e in result.embeddings]
                 
-                # 결과를 원래 위치에 배치하고 캐시에 저장
+                # Place results in original positions and save to cache
                 for i, embedding in enumerate(batch_embeddings):
                     original_index = cache_indices[i]
                     embeddings[original_index] = embedding
@@ -190,9 +190,9 @@ class GeminiChunkSelector(ChunkSelector):
                     
             except Exception as e:
                 print(f"Error getting Gemini embeddings: {e}")
-                # 실패한 경우 더미 임베딩 반환
+                # Return dummy embeddings if failed
                 for i in cache_indices:
-                    embeddings[i] = [0.0] * 768  # 기본 차원
+                    embeddings[i] = [0.0] * 768  # Default dimension
         
         return embeddings
     
@@ -200,20 +200,20 @@ class GeminiChunkSelector(ChunkSelector):
         selected_indices = set()
         print("let's go gemini")
         
-        # 쿼리와 청크를 각각 다른 task_type으로 임베딩
+        # Embed query and chunks with different task_types
         query_embeddings = await self.get_embeddings_batch(queries, task_type="FACT_VERIFICATION")
         chunk_embeddings = await self.get_embeddings_batch(chunks, task_type="RETRIEVAL_DOCUMENT")
         
-        # 각 쿼리별로 top-k 청크 선택
+        # Select top-k chunks for each query
         for query_emb in query_embeddings:
             scores = [self.cosine_similarity(query_emb, chunk_emb) for chunk_emb in chunk_embeddings]
-            # 점수가 높은 순으로 인덱스 정렬
+            # Sort indices by descending score
             ranked_indices = np.argsort(scores)[::-1]
-            # 상위 k개 선택
+            # Select top-k
             for i in range(min(top_k, len(ranked_indices))):
                 selected_indices.add(ranked_indices[i])
         
-        # 원래 순서대로 정렬하여 청크 합치기
+        # Join chunks in their original order
         selected_indices = sorted(selected_indices)
         selected_chunks = [chunks[i] for i in selected_indices]
         return '\n\n'.join(selected_chunks)
@@ -226,38 +226,37 @@ class SentenceTransformerChunkSelector(ChunkSelector):
     async def select(self, queries: List[str], chunks: List[str], top_k: int) -> str:
         selected_indices = set()
         
-        # 청크 임베딩 미리 계산
+        # Pre-calculate chunk embeddings
         chunk_embs = self.model.encode(chunks)
         
-        # 각 쿼리별로 top-k 청크 선택
+        # Select top-k chunks for each query
         for query in queries:
             query_emb = self.model.encode([query])[0]
             scores = [np.dot(query_emb, emb) / (np.linalg.norm(query_emb) * np.linalg.norm(emb)) for emb in chunk_embs]
-            # 점수가 높은 순으로 인덱스 정렬
+            # Sort indices by descending score
             ranked_indices = np.argsort(scores)[::-1]
-            # 상위 k개 선택
+            # Select top-k
             for i in range(min(top_k, len(ranked_indices))):
                 selected_indices.add(ranked_indices[i])
         
-        # 원래 순서대로 정렬하여 청크 합치기
+        # Join chunks in their original order
         selected_indices = sorted(selected_indices)
         selected_chunks = [chunks[i] for i in selected_indices]
         return '\n\n'.join(selected_chunks)
 
 def split_text_by_tokens(text, model_name="cl100k_base", max_tokens=4000):
     """
-    텍스트를 토큰 단위로 분할하는 함수
+    Function to split text into chunks based on token count
     """
-    # 모델에 맞는 인코더 가져오기
+    # Retrieve encoder for the model
     encoding = tiktoken.get_encoding(model_name)
     
-    # 텍스트를 토큰으로 변환
-    #jh
+    # Convert text to tokens
     cleaned_text = text.replace('<|endoftext|>', '').replace('<|endofprompt|>', '')
 
     tokens = encoding.encode(cleaned_text)
     
-    # 토큰을 max_tokens 크기로 분할
+    # Split tokens up to max_tokens limit
     chunks = []
     for i in range(0, len(tokens), max_tokens):
         chunk_tokens = tokens[i:i + max_tokens]
@@ -273,31 +272,31 @@ async def limit_tokens_by_chunk(queries: list[str], content, chunk_size=1000, to
                            openai_model: str = "text-embedding-3-large",
                            gemini_model: str = "gemini-embedding-001"):
     """
-    선택한 방법을 사용해 queries와 가장 관련성이 높은 상위 K개 chunk들을 각 쿼리별로 가져온 후
-    중복을 제거하고 원래 순서대로 합쳐서 반환 (캐싱 지원)
+    Selects top K chunks most relevant to each query using the specified method,
+    removes duplicates, and merges them in their original order (Caching supported).
 
     Args:
-        queries: 쿼리 문자열 리스트
-        content: 검색할 전체 컨텐츠
-        chunk_size: 각 청크의 최대 토큰 수
-        top_k: 각 쿼리당 가져올 상위 청크 개수
-        model_name: 토큰화에 사용할 모델명
-        method: 청크 선택 방법 ("bm25", "openai", "sentence_transformer", "gemini")
-        sentence_transformer_model: SentenceTransformer 모델명
-        openai_model: OpenAI 임베딩 모델명
-        gemini_model: Gemini 임베딩 모델명
+        queries: List of query strings
+        content: Original content to be searched
+        chunk_size: Maximum tokens per chunk
+        top_k: Number of most relevant chunks to filter per query
+        model_name: Name of model for tokenization
+        method: Chunk selection method ("bm25", "openai", "sentence_transformer", "gemini")
+        sentence_transformer_model: SentenceTransformer model name
+        openai_model: OpenAI embedding model name
+        gemini_model: Gemini embedding model name
         
     Returns:
-        str: 선택된 청크들을 원래 순서대로 합친 텍스트
+        str: Selected chunks merged in their original order
     """
-    # content를 chunk로 분할
+    # Split content into chunks
     chunks = split_text_by_tokens(content, max_tokens=chunk_size, model_name=model_name)
 
     if len(chunks) <= top_k * len(queries):
-        # 만약 chunk의 개수가 top_k보다 작거나 같다면, 전체 content를 반환
+        # If the number of chunks is equal to or less than top_k, return entire content
         return content
     
-    # 선택기 생성
+    # Create selector
     if method == "bm25":
         selector = BM25ChunkSelector()
     elif method == "openai":
@@ -312,54 +311,54 @@ async def limit_tokens_by_chunk(queries: list[str], content, chunk_size=1000, to
     return await selector.select(queries, chunks, top_k)
 
 
-# 기존 BM25 전용 함수 (호환성을 위해 유지)
+# Legacy BM25 function (kept for backward compatibility)
 async def limit_tokens_by_chunk_bm25_only(queries: list[str], content, chunk_size=1000, top_k=2, model_name="cl100k_base"):
     """
-    BM25 점수를 기반으로 queries와 가장 관련성이 높은 상위 K개 chunk들을 각 쿼리별로 가져온 후
-    중복을 제거하고 원래 순서대로 합쳐서 반환
+    Selects top K chunks most relevant to each query based on BM25 score,
+    removes duplicates, and merges them in their original order.
 
     Args:
-        queries: 쿼리 문자열 리스트
-        content: 검색할 전체 컨텐츠
-        chunk_size: 각 청크의 최대 토큰 수
-        top_k: 각 쿼리당 가져올 상위 청크 개수
-        model_name: 토큰화에 사용할 모델명
+        queries: List of query strings
+        content: Original content to be searched
+        chunk_size: Maximum tokens per chunk
+        top_k: Number of most relevant chunks to filter per query
+        model_name: Name of model for tokenization
         
     Returns:
-        str: 선택된 청크들을 원래 순서대로 합친 텍스트
+        str: Selected chunks merged in their original order
     """
-    # content를 chunk로 분할
+    # Split content into chunks
     chunks = split_text_by_tokens(content, max_tokens=chunk_size, model_name=model_name)
 
     if len(chunks) <= top_k * len(queries):
-        # 만약 chunk의 개수가 top_k보다 작거나 같다면, 전체 content를 반환
+        # If the number of chunks is equal to or less than top_k, return entire content
         return content
 
-    # 각 chunk를 토큰화
+    # Tokenize each chunk
     tokenized_chunks = [chunk.split() for chunk in chunks]
     
-    # BM25 인덱스 생성
+    # Create BM25 Index
     if BM25Okapi is None:
         raise ImportError("rank_bm25 module is not installed for BM25ChunkSelector.")
         
     bm25 = BM25Okapi(tokenized_chunks)
     
-    # 모든 쿼리에서 선택된 청크 인덱스들을 수집
+    # Collect all selected chunk indices across queries
     selected_indices = set()
     
     for query in queries:
-        # query 토큰화 및 점수 계산
+        # Tokenize query and get scores
         tokenized_query = query.split()
         scores = bm25.get_scores(tokenized_query)
         
-        # 상위 K개 chunk 인덱스 선택
+        # Select top K chunk indices
         top_k_indices = np.argsort(scores)[::-1][:top_k].tolist()
         selected_indices.update(top_k_indices)
     
-    # 선택된 인덱스들을 원래 순서대로 정렬
+    # Sort the selected indices in their original order
     sorted_indices = sorted(selected_indices)
     
-    # 해당 chunk들을 원래 순서대로 가져와서 연결
+    # Fetch corresponding chunks and merge
     selected_chunks = [chunks[i] for i in sorted_indices]
     
     return "\n\n...\n\n".join(selected_chunks)

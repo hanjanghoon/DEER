@@ -1,16 +1,15 @@
 from pydantic import BaseModel, Field
 from typing import Union, Literal
 
-# 점수 타입: 0-10 정수 또는 "N/A"
+# Score type: integer 0-10 or "N/A"
 ScoreType = Union[int, Literal["N/A"]]
 
 
-# ============================================================================
-# 공통 ScoreFactor 클래스
+# Common ScoreFactor Class
 # ============================================================================
 
 class ScoreFactor(BaseModel):
-    """개별 평가 항목: {description, score}"""
+    """Individual evaluation item: {description, score}"""
     description: str = Field(..., description="Detailed description of the evaluation issue or compliance")
     score: ScoreType = Field(..., description="Score from 0-10 or 'N/A'")
 

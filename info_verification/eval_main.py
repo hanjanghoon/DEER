@@ -2,8 +2,6 @@ from .report_utils import split_references, extract_references
 from .claim_processor import extract_claims, add_line_sent_to_report
 from .claim_verifier import verify_claims_async, backtrack_claims, replace_claims_to_url
 from .eval_metrics import compute_metrics
-# from .directquote_detector import detect_direct_quote
-# from .fairuse_detector import calculate_fairuse
 from tqdm import tqdm
 import asyncio
 import time
@@ -18,7 +16,7 @@ async def evaluate_report(report: str, batch_size=20, extract_model: str = "gpt-
         report (str): The report text to evaluate.
 
     Returns:
-        str: The processed report with claims verified and line numbers added.
+        dict: Processed results including the updated report, claims, metrics, and references.
     """
     start_time = time.time()
     
@@ -32,7 +30,7 @@ async def evaluate_report(report: str, batch_size=20, extract_model: str = "gpt-
         references = extract_references(report)
 
     # Add line numbers to the report and extract sentences
-    # This will also return a dictionary mapping line numbers to sentences
+    # This will return a dictionary mapping line numbers to sentences
     # and a report with line numbers prefixed to each sentence.
     # Example: "L1. S1: Sentence 1" for line 1
     report_line_prefixed, line_sents = add_line_sent_to_report(report)
@@ -77,28 +75,8 @@ async def evaluate_report(report: str, batch_size=20, extract_model: str = "gpt-
     
     verify_end = time.time()
     print(f"✓ Claim verification completed in {verify_end - verify_start:.2f}s")
-
-    # fairuse_results = calculate_fairuse(report)
-    # fairuse_results.pop("citation_sentences_list", None)  # Remove this key if not needed
-
-    citation_to_contexts = {
-        citation: contexts.get(url, {}).get("context", "")
-        for citation, url in references.items()
-    }
-    
-    # print("Starting direct quote detection...")
-    # quote_start = time.time()
-    
-    # direct_quote_results = await detect_direct_quote(
-    #     report, citation_to_contexts, similarity_threshold=0.8
-    # )
-    
-    # quote_end = time.time()
-    # print(f"✓ Direct quote detection completed in {quote_end - quote_start:.2f}s")
     
     metrics = compute_metrics(verified_claims, references=references, context_informations=contexts)
-    # metrics['raw']['quote']=direct_quote_results['results']
-    # metrics["ethics_compliance"] = direct_quote_results['ethics_compliance']
 
     total_time = time.time() - start_time
     print(f"🎉 Total evaluation completed in {total_time:.2f}s")
@@ -115,18 +93,10 @@ async def evaluate_report(report: str, batch_size=20, extract_model: str = "gpt-
 if __name__ == "__main__":
     from dotenv import load_dotenv
     load_dotenv()
-    # file = "deep_research_samples/openai_o3-pro_6_cleaned.md"
-    # file = "deep_resea`rch_samples/gemini-2.5-pro_cleaned_6_0706.md"
-    # file = "deep_research_samples/chatexaone_deepresearch_1.md"
-    # file = "deep_research_samples/chatexaone_fast_1.md"
 
     async def main():
         files = [
             "data/test/economics-gemini-2.5-pro_deep_1.md",
-            # "data/micro1_economics/1/gemini-2.5-pro_deep_1.md",
-            # "data/micro1_economics/1/claude_opus4.1_deep_1.md",
-            # "data/micro1_economics/1/chatexaone_251208_deepresearch_1.md",
-            # "data/micro1_economics/1/gpt5_deep_1.md",
         ]
         
         for file in files:

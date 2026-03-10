@@ -147,7 +147,7 @@ def get_model_kwargs(
     if "reasoning_effort" in params:
         out_params["reasoning_effort"] = reasoning_effort
     return out_params
-#여기.
+
 async def batch_verify_claim_from_url_async(
     claims: list[Claim], context: str, url: str, model: str = "gpt-4.1",
     limit_tokens: bool = True, top_k: int = 2, chunk_size: int = 1000, batch_size: int = 20
@@ -485,56 +485,3 @@ if __name__ == "__main__":
     from .report_utils import split_references, extract_references
 
     asyncio.run(test_verify_claims_async())
-
-    # async def amain_testset():
-    #     filename = "deep_research_samples/chatexaone_fast_1"
-    #     processed_md = f"{filename}_processed.md"
-    #     # If processed_md exists, use it to ensure lines match? 
-    #     # But we need references from the original or processed. 
-    #     # Typically refs are at bottom.
-        
-    #     md_file = f"{filename}.md"
-    #     print(f"Reading {md_file}...")
-    #     with open(md_file, "r") as f:
-    #         report = f.read()
-    #         report, references_text = split_references(report)
-    #         citations = extract_references(references_text)
-
-    #     print(f"Found {len(citations)} citations.")
-    #     # pprint(citations)
-
-    #     claims_file = f"{filename}_claims_v5.json"
-    #     print(f"Reading {claims_file}...")
-    #     with open(claims_file, "r") as f:
-    #         data = json.load(f)
-    #         claims = [Claim(**claim) for claim in data]
-        
-    #     print(f"Loaded {len(claims)} claims.")
-
-    #     # Resolve citations
-    #     backtrack_claims(claims)
-    #     replace_claims_to_url(claims, citations)
-        
-    #     print(f"Verifying claims... (Model: gpt-4.1-mini)")
-    #     # Run verification
-    #     results, ctx_info = await verify_claims_async(claims, model="gpt-4.1-mini", return_context=True)
-        
-    #     # Save results
-    #     output_file = f"{filename}_results_v5.json"
-        
-    #     # clean ctx info for saving
-    #     for url in ctx_info:
-    #         ctx_info[url]["context"] = f"<hidden length={len(ctx_info[url]['context'])}>"
-
-    #     output_data = {
-    #         "verifications": [x.model_dump() for x in results],
-    #         "citations": citations,
-    #         "context_info": ctx_info
-    #     }
-        
-    #     with open(output_file, "w") as f:
-    #         json.dump(output_data, f, indent=2, ensure_ascii=False)
-            
-    #     print(f"Saved results to {output_file}")
-
-    # asyncio.run(amain_testset())
