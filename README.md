@@ -43,6 +43,10 @@ JINA_API_KEY=your_jina_key_here
 
 ## Data
 
+Due to contamination risk, the dataset is provided separately via [Google Drive](https://drive.google.com/file/d/1Q9VxD6Z6YWbwYbnQq9J_60v7QyzU9g7H/view?usp=drive_link). If you need access, please contact hanjh9439@gmail.com.
+
+Download the dataset and extract it in the project root so that it is placed under `data/`.
+
 Each domain folder inside `data/` contains a `query.md`.
 
 Generate a report that answers the query and place the report file in the same directory.
