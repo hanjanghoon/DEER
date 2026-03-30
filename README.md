@@ -275,3 +275,10 @@ bash run_domain_all.sh
 
 * Code: MIT
 * Data: CC BY-NC 4.0 (Non-commercial use only)
+
+Exception:
+The files `core_criteria.md` within the `data/` directory are subject to additional restrictions.
+
+Use of these files for commercial purposes is not permitted.
+
+Redistribution, sharing, or public posting of these files is not permitted without explicit permission from the author.
