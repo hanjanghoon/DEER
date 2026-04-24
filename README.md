@@ -281,4 +281,4 @@ The files `core_criteria.md` within the `data/` directory are subject to additio
 
 Use of these files for commercial purposes is not permitted.
 
-Redistribution, sharing, or public posting of these files is not permitted without explicit permission from the author.
+Redistribution, sharing, or public posting of these files is not permitted.
