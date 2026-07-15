@@ -1,10 +1,91 @@
-Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+DEER DATASET LICENSE
 
-Copyright (c) 2025 Janghoon Han
+Copyright © 2026 LG AI Research. All rights reserved.
 
-This dataset is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
+1. PURPOSE
 
-You may use, share, and adapt the data for non-commercial purposes only.
+The DEER dataset is distributed to support non-commercial research, model development, training, and evaluation while preserving the integrity of the benchmark.
+The redistribution and public-indexing restrictions in this license are intended to prevent evaluation contamination, including cases in which web-enabled models or agents retrieve benchmark questions, rubrics, reference materials, or related evaluation content from publicly searchable sources during evaluation.
 
-Full license text:
-https://creativecommons.org/licenses/by-nc/4.0/
+2. PERMITTED USES
+
+Permission is granted to download and use the DEER dataset solely for non-commercial purposes, including:
+
+* academic and scientific research;
+* benchmark evaluation;
+* model training, fine-tuning, and continued pretraining; and
+* development and analysis of machine-learning systems.
+
+Models, model weights, research results, analyses, and other outputs produced using the dataset may be published and distributed for non-commercial purposes, provided that they do not reproduce substantial portions of the original dataset.
+
+Private storage, processing, and internal sharing within the same organization are permitted solely for the non-commercial purposes described above.
+
+3. COMMERCIAL USE RESTRICTIONS
+
+Commercial use of the DEER dataset is prohibited without prior written permission from LG AI Research.
+
+Commercial use includes, but is not limited to:
+
+* use in commercial products or services;
+* use for commercial model development, training, or improvement;
+* use in paid APIs, hosted services, or customer-facing systems; and
+* use primarily intended to generate commercial benefit.
+For commercial licensing inquiries, please contact LG AI Research.
+
+4. REDISTRIBUTION RESTRICTIONS
+
+Without prior written permission from LG AI Research, you may not:
+
+* redistribute, mirror, republish, sublicense, or publicly host the original dataset, in whole or in substantial part;
+* upload the original dataset or substantial portions of it to another repository, dataset platform, website, file-sharing service, cloud drive, or similar service;
+* provide copies of the original dataset to third parties outside your organization; or
+* publish extracted, reformatted, translated, modified, or derivative versions that reproduce substantial portions of the original benchmark content.
+
+Users must direct others to the official DEER repository rather than distributing copies of the dataset.
+
+5. PUBLIC SEARCH AND INDEXING RESTRICTIONS
+
+You may not make the original benchmark questions, rubrics, reference materials, or other evaluation content publicly searchable, indexable, browsable, or retrievable through:
+
+* search engines;
+* publicly accessible websites;
+* public APIs;
+* public retrieval-augmented generation systems;
+* vector databases or retrieval systems accessible to third parties;
+* dataset viewers or dataset platforms; or
+* any other publicly accessible service or repository.
+
+You may not intentionally expose benchmark content in a manner that allows a web-enabled model or agent to retrieve it during evaluation.
+
+These restrictions do not prohibit private processing of the dataset for permitted non-commercial research, training, development, or evaluation purposes.
+
+6. EVALUATION INTEGRITY
+
+When evaluating a model or agent on DEER, users should take reasonable measures to prevent the evaluated system from accessing benchmark content through local files, retrieval indexes, cached data, public mirrors, or other unintended sources.
+
+Evaluation results must not be represented as valid DEER results if the evaluated system had access to the relevant benchmark questions, rubrics, reference materials, or equivalent content before or during evaluation, except where such access is explicitly part of the reported evaluation setting.
+
+7. CITATION
+
+Any publication, released model, technical report, dataset, or other public output that materially uses the DEER dataset must cite the following paper:
+
+@inproceedings{
+han2026deer,
+title={{DEER}: A Benchmark for Evaluating Deep Research Agents on Expert Report Generation},
+author={Janghoon Han and Heegyu Kim and Changho Lee and Dahm Lee and Min Hyung Park and Hosung Song and Stanley Jungkyu Choi and Moontae Lee and Honglak Lee},
+booktitle={Forty-third International Conference on Machine Learning},
+year={2026},
+url={https://openreview.net/forum?id=ILRx5neJk6}
+}
+
+8. NO WARRANTY
+
+The dataset is provided “as is,” without warranties or conditions of any kind, express or implied.
+
+LG AI Research shall not be liable for any claims, damages, losses, or other liabilities arising from the use of the dataset.
+
+9. RESERVATION OF RIGHTS
+
+No ownership rights are transferred under this license.
+
+All rights not expressly granted under this license are reserved by LG AI Research.
